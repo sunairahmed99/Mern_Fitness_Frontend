@@ -7,6 +7,7 @@ import UserProfilePage from "./Pages/UserProfilePage";
 import UserProfileEditPage from "./Pages/UserProfileEditPage";
 import ForgotPage from "./Pages/ForgotPage";
 import ResetPage from "./Pages/ResetPage";
+import NutritionPage from "./Pages/NutritionPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/edit/profile/page/:id' element={<UserProfileEditPage/>}/>
         <Route path='/forgot/page/' element={<ForgotPage/>}/>
         <Route path='/reset/page/:tokenn' element={<ResetPage/>}/>
+        <Route path='/nutrition/page' element={<NutritionPage/>}/>
       </Routes>
   );
 }
