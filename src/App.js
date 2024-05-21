@@ -1,24 +1,25 @@
-import './App.css';
-import Footer from './components/Footer/Footer';
-import Hero from './components/Hero/Hero'
-import Join from './components/Join/Join';
-import Plans from './components/Plans/Plans';
-import Programs from './components/Programs/Programs';
-import Reasons from './components/Reasons/Reasons';
-import Testimonials from './components/Testimonials/Testimonials';
+import React from "react";
+import {Routes,Route} from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import RegisterPage from "./Pages/RegisterPage";
+import LoginPage from "./Pages/LoginPage";
+import UserProfilePage from "./Pages/UserProfilePage";
+import UserProfileEditPage from "./Pages/UserProfileEditPage";
+import ForgotPage from "./Pages/ForgotPage";
+import ResetPage from "./Pages/ResetPage";
+
+
 function App() {
   return (
-    <div className="App">
-          <Hero/>
-          <Programs/>
-          <Reasons/>
-          {/* <Plans/> */}
-          <Testimonials/>
-          <Join/>
-          <Footer/>
-
-          
-    </div>
+      <Routes>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='/register/page' element={<RegisterPage/>}/>
+        <Route path='/login/page' element={<LoginPage/>}/>
+        <Route path='/profile/page' element={<UserProfilePage/>}/>
+        <Route path='/edit/profile/page/:id' element={<UserProfileEditPage/>}/>
+        <Route path='/forgot/page/' element={<ForgotPage/>}/>
+        <Route path='/reset/page/:tokenn' element={<ResetPage/>}/>
+      </Routes>
   );
 }
 
