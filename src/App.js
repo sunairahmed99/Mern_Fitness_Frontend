@@ -11,6 +11,7 @@ import NutritionPage from "./Pages/NutritionPage";
 import FprogressPage from "./Pages/FprogressPage";
 import NutritionEditPage from "./Pages/NutritionEditPage";
 import FprogresseditPage from "./Pages/FprogresseditPage";
+import SupportPage from "./Pages/SupportPage";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/nutrition/edit/page/:id' element={<NutritionEditPage/>}/>
         <Route path='/fitness/progress/page' element={<FprogressPage/>}/>
         <Route path='/fitness/progress/edit/page/:id' element={<FprogresseditPage/>}/>
+        <Route path='/support/page' element={<SupportPage/>}/>
       </Routes>
   );
 }

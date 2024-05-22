@@ -16,6 +16,7 @@ export const fetchUser = createAsyncThunk(
             return response.data.data
 
         }catch(error){
+            localStorage.removeItem('token')
             return rejectWithValue(error)
         }
     },
