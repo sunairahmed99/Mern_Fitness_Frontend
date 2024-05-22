@@ -1,25 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from 'react-redux'
+import { createprogress, delprogress, getallprogress, progressdata } from './fprogressslice'
+import { Link } from 'react-router-dom'
 
 export default function Fprogress() {
     const {register,handleSubmit,formState: { errors }} = useForm()
+    let token = localStorage.getItem('token')
+    let {progress} = useSelector(progressdata)
+    console.log(progress)
+    let dispatch = useDispatch()
 
     const onSubmit = (data) => {
+      console.log(data)
+      console.log(data.weight)
 
-        // let formData = new FormData()
-        // formData.append('name',data.name)
-        // formData.append('phone',data.phone)
-        // formData.append('email',data.email)
-        // formData.append('image',data.image[0])
-        // formData.append('password',data.password)
-    
-        // registeruser(formData)
+      dispatch(createprogress({data,token}))
       }
+
+    const delitem = (e,prog)=>{
+      
+      let id = prog._id
+
+
+      dispatch(delprogress({id,token}))
+      alert('are you sure to delete this')
+      dispatch(getallprogress(token))
+
+    }  
+
+      useEffect(()=>{
+
+        dispatch(getallprogress(token))
+
+      },[dispatch,token])
+
+
+
   return (
     
     <div className='h-[125vh] bg-bgcolor'>
 
-      <div className="flex min-h-full flex-1 flex-col justify-center mt-[-170px] px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center mt-[-70px] px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
           <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
@@ -30,87 +52,116 @@ export default function Fprogress() {
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <form noValidate className="space-y-6"  method="POST" onSubmit={handleSubmit(onSubmit)}>
 
-          <div>
-              <label htmlFor="foodtype" className="block text-sm font-medium leading-6 text-white">
-                Food Type
-              </label>
-              <div className="mt-2">
-              <select
-                  id="country"
-                  name="country"
-                  autoComplete="country-name"
-                  className="w-[375px] rounded-md border-0 py-2.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
-                >
-                  <option>Break Fast</option>
-                  <option>Lunch</option>
-                  <option>Dinner</option>
-                </select>
-              </div>
-              {errors.foodtype && <p className='text-red-400'>{errors.foodtype.message}</p>}
-            </div>
-
             <div>
-              <label htmlFor="fooditem" className="block text-sm font-medium leading-6 text-white">
-                Food Item
+              <label htmlFor="weight" className="block text-sm font-medium leading-6 text-white">
+                My Weight In Kgs
               </label>
               <div className="mt-2">
                 <input
-                  id="fooditem"
-                  {...register("fooditem", { required:'Food Item required'})}
-                  type="text"
+                  id="weight"
+                  {...register("weight", { required:'Weight required'})}
+                  type="Number"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.fooditem && <p className='text-red-400'>{errors.fooditem.message}</p>}
+              {errors.weight && <p className='text-red-400'>{errors.weight.message}</p>}
             </div>
 
             <div>
-              <label htmlFor="foodqty" className="block text-sm font-medium leading-6 text-white">
-                Food Quantity
+              <label htmlFor="waist" className="block text-sm font-medium leading-6 text-white">
+                My Waist In Cms
               </label>
               <div className="mt-2">
                 <input
-                  id="foodqty"
-                  {...register("foodqty", { required:'Food Quantity Item required'})}
-                  type="text"
+                  id="waist"
+                  {...register("waist", { required:'Waist required'})}
+                  type="Number"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.foodqty && <p className='text-red-400'>{errors.foodqty.message}</p>}
+              {errors.waist && <p className='text-red-400'>{errors.waist.message}</p>}
             </div>
 
             <div>
-              <label htmlFor="protien" className="block text-sm font-medium leading-6 text-white">
-                Protien
+              <label htmlFor="shoulder" className="block text-sm font-medium leading-6 text-white">
+                My Shoulder in Cms
               </label>
               <div className="mt-2">
                 <input
-                  id="protien"
-                  {...register("protien", { required:'protien required'})}
-                  type="text"
+                  id="shoulder"
+                  {...register("shoulder", { required:'shoulder required'})}
+                  type="Number"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.protien && <p className='text-red-400'>{errors.protien.message}</p>}
+              {errors.shoulder && <p className='text-red-400'>{errors.shoulder.message}</p>}
             </div>
 
             <div>
-              <label htmlFor="protien" className="block text-sm font-medium leading-6 text-white">
-                Calories
+              <label htmlFor="arms" className="block text-sm font-medium leading-6 text-white">
+                My Arms in Cms
               </label>
               <div className="mt-2">
                 <input
-                  id="protien"
-                  {...register("calories", { required:'protien required'})}
-                  type="text"
+                  id="arms"
+                  {...register("arms", { required:'Arms required'})}
+                  type="Number"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-              {errors.calories && <p className='text-red-400'>{errors.calories.message}</p>}
+              {errors.arms && <p className='text-red-400'>{errors.arms.message}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="legs" className="block text-sm font-medium leading-6 text-white">
+                My Legs in Cms
+              </label>
+              <div className="mt-2">
+                <input
+                  id="legs"
+                  {...register("legs", { required:'Legs required'})}
+                  type="Number"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              {errors.legs && <p className='text-red-400'>{errors.legs.message}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="runTime" className="block text-sm font-medium leading-6 text-white">
+                My runTime In Mins
+              </label>
+              <div className="mt-2">
+                <input
+                  id="runTime"
+                  {...register("runTime", { required:'runTime required'})}
+                  type="Number"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              {errors.runTime && <p className='text-red-400'>{errors.runTime.message}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="liftinWeight" className="block text-sm font-medium leading-6 text-white">
+                My LiftinWeight in Kgs
+              </label>
+              <div className="mt-2">
+                <input
+                  id="liftinWeight"
+                  {...register("liftinWeight", { required:'liftinWeight required'})}
+                  type="Number"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              {errors.liftinWeight && <p className='text-red-400'>{errors.liftinWeight.message}</p>}
             </div>
 
             <div>
@@ -125,54 +176,85 @@ export default function Fprogress() {
         </div>
       </div>
 
-    <div className='text-center text-white mt-[-100px] font-bold text-xl'>
+    <div className='text-center bg-bgcolor text-white mb-[30px]  mt-[30px] font-bold text-xl'>
     <h1>Your Fitness Progress Data</h1>
     </div>
-      
 
-      <table className="w-full mt-[50px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+     <div className="relative overflow-x-auto mt-[30px] shadow-md sm:rounded-lg">     
+     {
+      progress  && progress.length &&
+      <table className="w-full mt-[5px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead className="text-xs text-gray-700 uppercase  bg-bgcolor text-white">
       <tr>
         <th scope="col" className="px-6 py-3">
           S.No
         </th>
         <th scope="col" className="px-6 py-3">
-          Food type
+          My Weight In Kgs
         </th>
         <th scope="col" className="px-6 py-3">
-          Food Item
+          My Waist In Cms
         </th>
         <th scope="col" className="px-6 py-3">
-          Food Quantity
+          My Shoulder In Cms
         </th>
         <th scope="col" className="px-6 py-3">
-          Protien
+          My Arms In Cms
         </th>
         <th scope="col" className="px-6 py-3">
-          Calories
+          My Legs In Cms
         </th>
         <th scope="col" className="px-6 py-3">
-          Food Quantity
+          My runTime in Mins
+        </th>
+        <th scope="col" className="px-6 py-3">
+          My Liftin Weight In Kgs
+        </th>
+        <th scope="col" className="px-6 py-3">
+         Actions
         </th>
       </tr>
     </thead>
     <tbody className="bg-bgcolor">
-      <tr className=" bg-bgcolor border-b dark:bg-red-600 dark:border-gray-700">
-        
-      <td className="text-white px-6 py-4">Silver</td>
-        <td className="text-white px-6 py-4">Silver</td>
-        <td className="text-white px-6 py-4">Laptop</td>
-        <td className=" text-white px-6 py-4">$2999</td>
-        <td className="text-white px-6 py-4">Silver</td>
-        <td className="text-white px-6 py-4">Laptop</td>
-        <td className=" text-white px-6 py-4">$2999</td>
-      </tr>
+      {
+        progress && progress.map((prog,index)=>{
+          return(
 
-      
-     
-      
+            <tr key={index} className=" bg-bgcolor border-b dark:bg-red-600 dark:border-gray-700">
+        
+            <td className="text-white px-6 py-4">{index}</td>
+              <td className="text-white px-6 py-4">{prog.weight}</td>
+              <td className="text-white px-6 py-4">{prog.waist}</td>
+              <td className=" text-white px-6 py-4">{prog.shoulder}</td>
+              <td className="text-white px-6 py-4">{prog.arms}</td>
+              <td className="text-white px-6 py-4">{prog.legs}</td>
+              <td className=" text-white px-6 py-4">{prog.runTime}</td>
+              <td className=" text-white px-6 py-4">{prog.liftingWeight}</td>
+              <td className=" text-white px-6 py-4">
+                
+              <Link
+                  to={`/fitness/progress/edit/page/${prog._id}`}
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Update
+                </Link>
+                <button
+                  onClick={e => delitem(e,prog)}
+                  className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+
+          )
+        })
+      }
     </tbody>
-  </table>
+      </table>
+      }
+      </div>
 
       
      
