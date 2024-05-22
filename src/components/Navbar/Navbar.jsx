@@ -18,10 +18,11 @@ export default function Navbar() {
   let userdatas
   let userNavigation
 
-  if(user &&  user.role === 'admin' && token){
+  if(user && user.role === 'admin' && token){
 
      navigation = [
-      { name: 'Admin', href: '#', current: true },
+      { name: 'Home', href: '/', current: false },
+      { name: 'Admin', href: '/admin/check/page', current: false },
       { name: 'Dashboard', href: '#', current: false },
       { name: 'Logout', href: '#', current: false },
     ];
@@ -31,20 +32,20 @@ export default function Navbar() {
       email: user.email,
       imageUrl: `http://localhost:9000/${user.image}`,
     };
-  }
-  else{
-    navigation = [
-      { name: 'Login', href: '#', current: true },
+    userNavigation = [
+      { name: 'My Profile', href: '/profile/page' },
+      { name: 'Update Password', href: '/password/update/page' },
+      { name: 'Sign out', href: '/logout/page' },
     ]
   }
-
-   if(token){
+  else if(token && user && user.role !== 'admin'){
 
     navigation = [
-      { name: 'Home', href: '#', current: true },
-      { name: 'About', href: '#', current: false },
-      { name: 'Blog', href: '#', current: false },
-      { name: 'Dashboard', href: '#', current: false },
+      { name: 'Home', href: '/', current: false },
+      { name: 'My Nutrition', href: '/nutrition/page', current: false },
+      { name: 'My Fitness', href: '/fitness/progress/page', current: false },
+      { name: 'My Support', href: '/support/page', current: false },
+      { name: 'Logout', href: '/logout/page', current: false },
     ];
 
      userdatas = {
@@ -54,18 +55,17 @@ export default function Navbar() {
     };
 
      userNavigation = [
-      { name: 'My Profile', href: '#' },
-      { name: 'Update Password', href: '#' },
-      { name: 'Sign out', href: '#' },
+      { name: 'My Profile', href: '/profile/page' },
+      { name: 'Update Password', href: '/password/update/page' },
+      { name: 'Sign out', href: '/logout/page' },
     ]
 
   }
   else{
-
     navigation = [
-      { name: 'Home', href: '#', current: true },
-      { name: 'About', href: '#', current: false },
-      { name: 'Blog', href: '#', current: false },
+      { name: 'Home', href: '/', current: true },
+      { name: 'Login', href: '/login/page', current: false },
+      { name: 'Register', href: '/register/page', current: false },
     ];
 
     userdatas = {
@@ -76,10 +76,12 @@ export default function Navbar() {
     };
 
     userNavigation = [
-      { name: 'Register', href: '#' },
-      { name: 'Login', href: '#' },
+      { name: 'Register', href: '/register/page' },
+      { name: 'Login', href: '/login/page' },
     ]
   }
+  
+
 
   useEffect(()=>{
     

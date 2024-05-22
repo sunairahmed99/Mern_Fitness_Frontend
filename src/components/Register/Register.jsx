@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
   const {register,handleSubmit,watch,reset,formState: { errors }} = useForm()
+  let token = localStorage.getItem('token')
   const [setterrors, getterrors] = useState(null)
   let navigate = useNavigate()
   let password = watch('password')
@@ -39,6 +40,8 @@ export default function Register() {
 
 
   return (
+    <>
+    {token && <Navigate to={'/'} replace={true}></Navigate>}
     <div className='h-[115vh] bg-bgcolor'>
 
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -141,6 +144,8 @@ export default function Register() {
                 />
               </div>
               {errors.password && <p className='text-red-400'>{errors.password.message}</p>}
+              {errors.password && errors.password.type === 'minLength' && <p className='text-red-400'>Minimum 6 digit Code</p>}
+              {errors.password && errors.password.type === 'maxLength' && <p className='text-red-400'>Maximum 11 digit code</p>}
             </div>
 
             <div>
@@ -185,5 +190,6 @@ export default function Register() {
       </div>
      
     </div>
+    </>
   )
 }

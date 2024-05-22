@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-scroll'
 import { useSelector } from 'react-redux'
 import { userdata } from './userSlice'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -145,14 +144,6 @@ export default function UserProfileEdit() {
               </button>
             </div>
           </form>
-
-          <p className="mt-3 text-center text-sm text-white">
-            Already a Member?{' '}
-            <Link to={"/login/page"} className="font-semibold leading-6 text-black hover:text-indigo-500">
-              Login Your Account
-            </Link>
-            
-          </p>
         </div>
       </div>
      

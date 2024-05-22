@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 
 export default function Login() {
     const {register,handleSubmit,reset,formState: { errors }} = useForm()
+    let token = localStorage.getItem('token')
     const [seterrors, geterrors] = useState(null)
     let navigate = useNavigate()
 
@@ -33,6 +34,8 @@ export default function Login() {
 
 
   return (
+    <>
+    {token && <Navigate to={'/'} replace={true}></Navigate>}
     <div className='h-[126vh] bg-bgcolor'>
 
       <div className="flex min-h-full mt-[-250px] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -110,5 +113,6 @@ export default function Login() {
       </div>
      
     </div>
+    </>
   )
 }

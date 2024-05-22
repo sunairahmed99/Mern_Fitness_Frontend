@@ -15,7 +15,6 @@ export default function HomePage() {
     <Hero/>
     <Programs/>
     <Reasons/>
-    {/* <Plans/> */}
     <Testimonials/>
     <Join/>
     <Footer/>

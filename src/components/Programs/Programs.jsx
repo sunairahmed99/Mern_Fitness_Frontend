@@ -17,8 +17,9 @@ const Programs = () => {
 
       {/* programs-categories */}
       <div className="prgoram-categories">
-        {programsData.map((program)=>(
+        {programsData.map((program,index)=>(
             <motion.div
+            key={index}
             whileHover={{background: 'var(--planCard)', cursor: 'pointer'}}
             transition={{type: 'spring'}}
             className="category">
