@@ -1,23 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { delNutrition, fetchNutrition, nutritiondata } from '../Nutritions/nutritionSlice'
 import { getallprogress,delprogress,progressdata } from '../Fprogress/fprogressslice'
 
 
 export default function AllProgress() {
     let token = localStorage.getItem('token')
-    // let {nutrition} = useSelector(nutritiondata)
-    // let {progress} = useSelector()
-    // console.log(nutrition)
+    let {progress} = useSelector(progressdata)
     let dispatch = useDispatch()
-    let progress
+  
 
-    const delitem = (e,nutr)=>{
-        let id = nutr._id
+    const delitem = (e,prog)=>{
+        let id = prog._id
 
         dispatch(delprogress({id,token}))
         alert('are you sure to delete this')
-        dispatch(delprogress(token))
+        dispatch(getallprogress(token))
 
     }
 
@@ -32,6 +29,7 @@ export default function AllProgress() {
     
   return (
     <>
+  
     <div className=' mt-[130px] text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
     <h1>All Users Progress Data</h1>
     </div>
@@ -71,24 +69,24 @@ export default function AllProgress() {
         </tr>
       </thead>
       
-      {/* <tbody className="bg-bgcolor">
+       <tbody className="bg-bgcolor">
         {
-          nutrition && nutrition.map((nutr,index)=>{
+          progress && progress.map((prog,index)=>{
             return(
               <tr key={index} className=" bg-bgcolor border-b dark:bg-red-600 dark:border-gray-700">
           
               <td className="text-white px-6 py-4">{index}</td>
-                <td className="text-white px-6 py-4">{nutr.userId.name}</td>
-                <td className="text-white px-6 py-4">{nutr.userId.email}</td>
-                <td className=" text-white px-6 py-4">{nutr.foodType}</td>
-                <td className="text-white px-6 py-4">{nutr.foodItem}</td>
-                <td className="text-white px-6 py-4">{nutr.quantity}</td>
-                <td className=" text-white px-6 py-4">{nutr.protein}</td>
-                <td className=" text-white px-6 py-4">{nutr.calories}</td>                
+                <td className="text-white px-6 py-4">{prog.userId.name}</td>
+                <td className="text-white px-6 py-4">{prog.userId.email}</td>
+                <td className=" text-white px-6 py-4">{prog.waist}</td>
+                <td className="text-white px-6 py-4">{prog.shoulder}</td>
+                <td className="text-white px-6 py-4">{prog.arms}</td>
+                <td className=" text-white px-6 py-4">{prog.runTime}</td>
+                <td className=" text-white px-6 py-4">{prog.liftingWeight}</td>                
                 <td className=" text-white px-6 py-4">
                 
                 <button
-                  onClick={e => delitem(e,nutr)}
+                  onClick={e => delitem(e,prog)}
                   className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Delete
@@ -99,7 +97,7 @@ export default function AllProgress() {
             )
           })
         }
-      </tbody> */}
+      </tbody> 
       
     </table>
     }

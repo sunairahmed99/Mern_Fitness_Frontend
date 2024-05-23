@@ -29,10 +29,10 @@ export default function AllUsers() {
     
   return (
     <>
-    <div className=' mt-[130px] text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
+    <div className=' mt-[50px] text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
     <h1>All Users Data</h1>
     </div>
-    <div className="relative overflow-x-auto mt-[-50px] shadow-md sm:rounded-lg">
+    <div className="relative overflow-x-auto mt-[100px] shadow-md sm:rounded-lg">
      
     {alluser.length &&
       <table className="w-full mt-[50px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

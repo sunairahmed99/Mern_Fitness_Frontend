@@ -29,7 +29,7 @@ function App() {
         <Route path='/admin/check/page' element={<AdminProtect children={<Admincheck/>}></AdminProtect>}/>
         <Route path='/all/user/page' element={<AdminProtect children={<AllUserPage/>}></AdminProtect>}/>
         <Route path='/all/nutrition/page' element={<AdminProtect children={<AllNutritionPage/>}></AdminProtect>}/>
-        <Route path='/all/nutrition/page' element={<AdminProtect children={<AllProgressPage/>}></AdminProtect>}/>
+        <Route path='/all/progressn/page' element={<AdminProtect children={<AllProgressPage/>}></AdminProtect>}/>
 
 
 
