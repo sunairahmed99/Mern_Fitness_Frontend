@@ -22,9 +22,10 @@ export default function Navbar() {
 
      navigation = [
       { name: 'Home', href: '/', current: false },
-      { name: 'Admin', href: '/admin/check/page', current: false },
-      { name: 'Dashboard', href: '#', current: false },
-      { name: 'Logout', href: '#', current: false },
+      { name: 'AllUsers', href: '/all/user/page', current: false },
+      { name: 'Users Nutritions', href: '/all/nutrition/page', current: false },
+      { name: 'Users Fitness', href: '#', current: false },
+      { name: 'Users Progress', href: '#', current: false },
     ];
 
     userdatas = {

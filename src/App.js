@@ -17,6 +17,8 @@ import Protect from "./components/Protect";
 import PasswordUpdatePage from "./Pages/PasswordUpdatePage";
 import AdminProtect from "./components/AdminProtect";
 import Admincheck from "./components/Admincheck";
+import AllUserPage from "./Pages/AllUserPage";
+import AllNutritionPage from "./Pages/AllNutritionPage";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
       <Routes>
 
         <Route path='/admin/check/page' element={<AdminProtect children={<Admincheck/>}></AdminProtect>}/>
+        <Route path='/all/user/page' element={<AdminProtect children={<AllUserPage/>}></AdminProtect>}/>
+        <Route path='/all/nutrition/page' element={<AdminProtect children={<AllNutritionPage/>}></AdminProtect>}/>
 
 
 

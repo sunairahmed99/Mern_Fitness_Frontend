@@ -22,10 +22,16 @@ export const fetchUser = createAsyncThunk(
     },
   )
 
+ 
+
+  
+
 const initialState = {
 
      user: null,
-     loading:true
+     loading:true,
+     error:false,
+     errmsg:null
 
   }
 
@@ -47,6 +53,7 @@ const userSlice = createSlice({
         state.loading = false
         state.user = action.payload
       })
+    
   },
 })
 

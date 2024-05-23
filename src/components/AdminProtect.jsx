@@ -1,21 +1,31 @@
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser, userdata } from './User/userSlice'
-import { Navigate} from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 export default function AdminProtect({children}) {
     let token = localStorage.getItem('token')
     let dispatch = useDispatch()
+    let navigate = useNavigate()
     let {user} = useSelector(userdata)
 
     useEffect(()=>{
         if(token){
             dispatch(fetchUser(token))
         }
-    },[dispatch,token])
+        else{
+          navigate('/')
+        }
+    },[dispatch,token,navigate])
 
-  if(user && user.role === 'admin'){
-    return user && user.role === 'admin' ? children : <Navigate to={'/'} replace={true}></Navigate>;
+
+  if(token && user && user.role === 'admin'){
+    return  children 
+  }
+  else if(user && user.role !=='admin'){
+    return <Navigate to={'/'} replace={true}></Navigate>
+
   }    
 };
 
