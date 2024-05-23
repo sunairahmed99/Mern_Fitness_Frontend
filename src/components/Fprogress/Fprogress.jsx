@@ -39,17 +39,17 @@ export default function Fprogress() {
 
   return (
     
-    <div className='h-[125vh] bg-bgcolor'>
+    <div className='h-[165vh] bg-bgcolor'>
 
       <div className="flex min-h-full flex-1 flex-col justify-center mt-[-70px] px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
-          <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          <h2 className="mt-[-47px] lg:mt-[-100px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
             My Fitness Progress
           </h2>
         </div>
 
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-6 lg:mt-[-40px] sm:mx-auto sm:w-full sm:max-w-sm">
           <form noValidate className="space-y-6"  method="POST" onSubmit={handleSubmit(onSubmit)}>
 
             <div>
@@ -176,11 +176,11 @@ export default function Fprogress() {
         </div>
       </div>
 
-    <div className='text-center bg-bgcolor text-white mb-[30px]  mt-[30px] font-bold text-xl'>
+    <div className='text-center bg-bgcolor text-white mb-[10px]  mt-[-20px] lg:mt-[-150px] font-bold text-xl'>
     <h1>Your Fitness Progress Data</h1>
     </div>
 
-     <div className="relative overflow-x-auto mt-[30px] shadow-md sm:rounded-lg">     
+     <div className="relative overflow-x-auto mt-[-14px] shadow-md sm:rounded-lg">     
      {
       progress  && progress.length &&
       <table className="w-full mt-[5px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@canvasjs/react-charts": "^1.0.2",
     "@emailjs/browser": "^3.6.2",
     "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.1.3",

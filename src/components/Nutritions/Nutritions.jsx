@@ -40,10 +40,10 @@ export default function Nutritions() {
     <>
       <div className='h-[125vh] bg-bgcolor'>
 
-      <div className="flex min-h-full flex-1 flex-col justify-center mt-[-170px] px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center mt-[-80px] px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
-          <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          <h2 className="mt-[-30px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
             My Nutrition
           </h2>
         </div>
@@ -145,6 +145,8 @@ export default function Nutritions() {
           </form>
         </div>
       </div>
+
+    
 
     <div className='text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
     <h1>Your Nutition Data</h1>

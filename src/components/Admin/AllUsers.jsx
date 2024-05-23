@@ -29,13 +29,14 @@ export default function AllUsers() {
     
   return (
     <>
-    <div className=' mt-[50px] text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
-    <h1>All Users Data</h1>
+    <div className='h-[125vh] bg-bgcolor'>
+    <div className=' mt-[50px]  text-red-400 text-center bg-bgcolor text-white pb-5 font-bold text-xl'>
+    <h1 className='pt-[100px]'>All Users Data</h1>
     </div>
     <div className="relative overflow-x-auto mt-[100px] shadow-md sm:rounded-lg">
      
     {alluser.length &&
-      <table className="w-full mt-[50px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <table className="w-full mt-[20px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase  bg-bgcolor text-white">
         <tr>
           <th scope="col" className="px-6 py-3">
@@ -69,7 +70,7 @@ export default function AllUsers() {
                 <td className="text-white px-6 py-4">{user.name}</td>
                 <td className="text-white px-6 py-4">{user.email}</td>
                 <td className=" text-white px-6 py-4">{user.phone}</td>
-                <td className="text-white px-6 py-4"><img src={`http://localhost:9000/${user.image}`} alt="" /></td>
+                <td className="text-white px-6 py-4"><img className='h-[80px] w-[80px]' src={`http://localhost:9000/${user.image}`} alt="" /></td>
                 
                 <td className=" text-white px-6 py-4">
                 
@@ -91,6 +92,7 @@ export default function AllUsers() {
     }
     
 
+    </div>
     </div>
     </>
   )

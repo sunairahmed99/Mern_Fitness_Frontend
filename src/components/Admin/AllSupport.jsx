@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getallprogress,delprogress,progressdata } from '../Fprogress/fprogressslice'
+import { delsupport, fetchsupport, supportdata } from '../Support/supportSlice'
 
 
-export default function AllProgress() {
+export default function AllSupport() {
     let token = localStorage.getItem('token')
-    let {progress} = useSelector(progressdata)
+    let {support} = useSelector(supportdata)
+    console.log(support)
     let dispatch = useDispatch()
   
 
-    const delitem = (e,prog)=>{
-        let id = prog._id
+    const delitem = (e,sport)=>{
+        let id = sport._id
 
-        dispatch(delprogress({id,token}))
+        dispatch(delsupport({id,token}))
         alert('are you sure to delete this')
-        dispatch(getallprogress(token))
+        dispatch(fetchsupport(token))
 
     }
 
@@ -22,20 +23,20 @@ export default function AllProgress() {
 
     useEffect(()=>{
 
-            dispatch(getallprogress(token))
+            dispatch(fetchsupport(token))
 
     },[dispatch,token])
 
     
   return (
     <>
-  
-    <div className=' mt-[130px] text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
-    <h1>All Users Progress Data</h1>
+     <div className='h-[110vh] bg-bgcolor'>
+    <div className=' mt-[70px] text-center bg-bgcolor text-white pb-5 lg:mt-[50px] font-bold text-xl'>
+    <h1 className='pt-[80px]'>All Users Support Data</h1>
     </div>
-    <div className="relative overflow-x-auto mt-[-50px] shadow-md sm:rounded-lg">
+    <div className="relative overflow-x-auto mt-[-30px] pt-[30px] shadow-md sm:rounded-lg">
      
-    {progress.length &&
+    {support.length &&
       <table className="w-full mt-[50px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase  bg-bgcolor text-white">
         <tr>
@@ -49,44 +50,33 @@ export default function AllProgress() {
             User Email
           </th>
           <th scope="col" className="px-6 py-3">
-            Waist
+            type
           </th>
           <th scope="col" className="px-6 py-3">
-            Shoulder
+            Description
           </th>
           <th scope="col" className="px-6 py-3">
-            arms
+            Action
           </th>
-          <th scope="col" className="px-6 py-3">
-            legs
-          </th>
-          <th scope="col" className="px-6 py-3">
-            runTime
-          </th>
-          <th scope="col" className="px-6 py-3">
-            liftinWeight
-          </th>
+          
         </tr>
       </thead>
       
        <tbody className="bg-bgcolor">
         {
-          progress && progress.map((prog,index)=>{
+          support && support.map((sport,index)=>{
             return(
               <tr key={index} className=" bg-bgcolor border-b dark:bg-red-600 dark:border-gray-700">
           
               <td className="text-white px-6 py-4">{index}</td>
-                <td className="text-white px-6 py-4">{prog.userId.name}</td>
-                <td className="text-white px-6 py-4">{prog.userId.email}</td>
-                <td className=" text-white px-6 py-4">{prog.waist}</td>
-                <td className="text-white px-6 py-4">{prog.shoulder}</td>
-                <td className="text-white px-6 py-4">{prog.arms}</td>
-                <td className=" text-white px-6 py-4">{prog.runTime}</td>
-                <td className=" text-white px-6 py-4">{prog.liftingWeight}</td>                
+                <td className="text-white px-6 py-4">{sport.userId.name}</td>
+                <td className="text-white px-6 py-4">{sport.userId.email}</td>
+                <td className=" text-white px-6 py-4">{sport.type}</td>
+                <td className="text-white px-6 py-4">{sport.description}</td>               
                 <td className=" text-white px-6 py-4">
                 
                 <button
-                  onClick={e => delitem(e,prog)}
+                  onClick={e => delitem(e,sport)}
                   className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Delete
@@ -103,6 +93,7 @@ export default function AllProgress() {
     }
     
 
+    </div>
     </div>
     </>
   )

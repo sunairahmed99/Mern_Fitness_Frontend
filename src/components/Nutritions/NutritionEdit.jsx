@@ -38,7 +38,7 @@ export default function NutritionEdit() {
 
     {nutrition._id  && 
     
-    <div className="bg-bgcolor flex min-h-full flex-1 flex-col justify-center mt-[-110px] px-6 py-12 lg:px-8">
+    <div className="bg-bgcolor lg:h-[115vh] flex min-h-full flex-1 flex-col justify-center mt-[-110px] px-6 py-12 lg:px-8">
     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
       
       <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
