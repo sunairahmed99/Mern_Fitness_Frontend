@@ -106,8 +106,9 @@ export default function Navbar() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <img
+              style={{height:'340',paddingTop:50}}
                 className="h-8 w-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src={'file.png'}
                 alt="Your Company"
               />
             </div>
