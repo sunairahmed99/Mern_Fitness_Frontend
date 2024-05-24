@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from 'react-redux'
 import { createprogress, delprogress, getallprogress, progressdata } from './fprogressslice'
 import { Link } from 'react-router-dom'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+
 
 export default function Fprogress() {
     const {register,handleSubmit,formState: { errors }} = useForm()
@@ -10,6 +14,50 @@ export default function Fprogress() {
     let {progress} = useSelector(progressdata)
     console.log(progress)
     let dispatch = useDispatch()
+
+    const generatePDF = () => {
+      const doc = new jsPDF();
+
+      const columns = [
+        { header: 'User ID', dataKey: 'userId._id' },
+        { header: 'Name', dataKey: 'userId.name' },
+        { header: 'Phone', dataKey: 'userId.phone' },
+        { header: 'Email', dataKey: 'userId.email' },
+        { header: 'Weight', dataKey: 'weight' },
+        { header: 'Waist', dataKey: 'waist' },
+        { header: 'Shoulder', dataKey: 'shoulder' },
+        { header: 'Arms', dataKey: 'arms' },
+        { header: 'Legs', dataKey: 'legs' },
+        { header: 'Run Time', dataKey: 'runTime' },
+        { header: 'Lifting Weight', dataKey: 'liftingWeight' },
+        { header: 'Create Date', dataKey: 'createdate' },
+      ];
+
+      const rows = progress.map(item => ({
+        'userId._id': item.userId._id,
+        'userId.name': item.userId.name,
+        'userId.phone': item.userId.phone,
+        'userId.email': item.userId.email,
+        'weight': item.weight,
+        'waist': item.waist,
+        'shoulder': item.shoulder,
+        'arms': item.arms,
+        'legs': item.legs,
+        'runTime': item.runTime,
+        'liftingWeight': item.liftingWeight,
+        'createdate': new Date(item.createdate).toLocaleString(), // Formatting date
+      }));
+
+      doc.text('My Fitness Progress Data', 14, 20);
+
+      doc.autoTable({
+        startY: 30,
+        head: [columns.map(col => col.header)],
+        body: rows.map(row => columns.map(col => row[col.dataKey])),
+      });
+
+      doc.save('user-metrics-data.pdf');
+    }
 
     const onSubmit = (data) => {
       console.log(data)
@@ -239,6 +287,12 @@ export default function Fprogress() {
                 >
                   Update
                 </Link>
+                <button
+                  onClick={generatePDF}
+                  className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Generate PDF
+                </button>
                 <button
                   onClick={e => delitem(e,prog)}
                   className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
