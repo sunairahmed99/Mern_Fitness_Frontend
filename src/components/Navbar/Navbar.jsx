@@ -106,7 +106,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <img
-              style={{height:340,paddingTop:50}}
+              style={{height:250,paddingTop:40}}
                 
                 src={'file3.png'}
                 alt="Your Company"
