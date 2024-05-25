@@ -3,7 +3,6 @@ import CanvasJSReact from '@canvasjs/react-charts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getallprogress, progressdata } from './fprogressslice';
 //var CanvasJSReact = require('@canvasjs/react-charts');
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
@@ -54,12 +53,12 @@ const dataPoints = Object.entries(aggregatedData).map(([key, value]) => ({
     
   
 // Format the data for the pie chart
-const pieChartData = {
-    type: "pie",
-    indexLabel: "{label}: {y}%",
-    startAngle: -90,
-    dataPoints: dataPoints
-};
+// const pieChartData = {
+//     type: "pie",
+//     indexLabel: "{label}: {y}%",
+//     startAngle: -90,
+//     dataPoints: dataPoints
+// };
 
 const options = {
     animationEnabled: true,

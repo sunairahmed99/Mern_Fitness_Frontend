@@ -22,6 +22,28 @@ export const getallprogress = createAsyncThunk(
     },
   )
 
+  export const getallprogressadmin = createAsyncThunk(
+    'progress/getalladmin',
+    async (token,rejectWithValue) => {
+
+        try{
+          console.log('hello')
+            
+            const response = await axios.get('http://localhost:9000/fitnessprogress/Alladmin',{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+            })
+            console.log(response)
+            return response.data
+
+        }catch(error){
+            console.log(error)
+            return rejectWithValue(error)
+        }
+    },
+  )
+
   export const getprogress = createAsyncThunk(
     'progress/get',
     async ({id,token},rejectWithValue) => {
@@ -137,6 +159,12 @@ const progressSlice = createSlice({
         state.error = true
         state.errmsg = action.payload
     })
+
+    .addCase(getallprogressadmin.fulfilled, (state, action) => {
+      state.loading = false
+      state.error = false
+      state.progress = action.payload
+  })
 
     .addCase(getprogress.pending, (state) => {
         state.loading = true

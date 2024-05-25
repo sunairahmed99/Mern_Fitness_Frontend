@@ -14,12 +14,30 @@ export const fetchNutrition = createAsyncThunk(
                     'Authorization': `Bearer ${token}`
                   }
             })
-            console.log(response)
-            console.log(response.data)
+            
             return response.data
 
         }catch(error){
-          console.log(error)
+            return rejectWithValue(error)
+        }
+    },
+  )
+
+  export const fetchNutritionadmin = createAsyncThunk(
+    'nutrition/fetchadmin',
+    async (token,rejectWithValue) => {
+
+        try{
+            
+            const response = await axios.get('http://localhost:9000/nutrition/Alladmin',{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+            })
+            
+            return response.data
+
+        }catch(error){
             return rejectWithValue(error)
         }
     },
@@ -36,7 +54,7 @@ export const fetchNutrition = createAsyncThunk(
                     'Authorization': `Bearer ${token}`
                   }
             })
-            console.log(response.data)
+            
             return response.data
 
         }catch(error){
@@ -139,6 +157,12 @@ const nutritionSlice = createSlice({
         state.error = true
         state.errmsg = action.payload
     })
+    .addCase(fetchNutritionadmin.fulfilled, (state, action) => {
+
+      state.loading = false
+      state.error = false
+      state.nutrition = action.payload
+  })
     .addCase(fetchgetNutrition.pending, (state) => {
         state.loading = true
         state.error = false

@@ -5,18 +5,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 export default function NutritionEdit() {
-    const {register,handleSubmit,formState: { errors }} = useForm()
+    const {register,handleSubmit} = useForm()
     let token = localStorage.getItem('token')
-    console.log(errors)
+    
     let {id} = useParams()
-    let {nutrition,loading} = useSelector(nutritiondata)
-    console.log(loading)
+    let {nutrition} = useSelector(nutritiondata)
+    
     let navigate = useNavigate()
     let dispatch = useDispatch()
     
 
     const onSubmit = (data) => {
-         console.log(data)
+         
   
          dispatch(updateNutrition({id,data,token}))
          navigate('/nutrition/page')
@@ -38,7 +38,7 @@ export default function NutritionEdit() {
 
     {nutrition._id  && 
     
-    <div className="bg-bgcolor lg:h-[115vh] flex min-h-full flex-1 flex-col justify-center mt-[-110px] px-6 py-12 lg:px-8">
+    <div className="bg-bgcolor h-[100vh] lg:h-[115vh] flex min-h-full flex-1 flex-col justify-center mt-[-110px] px-6 py-12 lg:px-8">
     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
       
       <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">

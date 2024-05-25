@@ -21,6 +21,25 @@ export const fetchsupport = createAsyncThunk(
     },
   )
 
+  export const fetchsupportadmin = createAsyncThunk(
+    'support/fetchadmin',
+    async (token,rejectWithValue) => {
+
+        try{
+            
+            const response = await axios.get('http://localhost:9000/supportsystem/Alladmin',{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+            })
+            return response.data.data
+
+        }catch(error){
+            return rejectWithValue(error)
+        }
+    },
+  )
+
   export const createsupport = createAsyncThunk(
     'support/create',
     async ({data,token},rejectWithValue) => {
@@ -92,6 +111,11 @@ const supportSlice = createSlice({
     state.error = true
     state.errmsg = action.payload
     })  
+    .addCase(fetchsupportadmin.fulfilled, (state, action) => {
+      state.loading = false
+      state.error = false
+      state.support = action.payload
+    })
     .addCase(createsupport.pending, (state) => {
         state.loading = true
       })

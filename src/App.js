@@ -22,7 +22,6 @@ import AllNutritionPage from "./Pages/AllNutritionPage";
 import AllFitnessPage from "./Pages/AllFitnessPage";
 import AllSupportPage from "./Pages/AllSupportPage";
 import NutritionChartPage from "./Pages/NutritionChartPage";
-import FprogressChart from "./components/Fprogress/FprogressChart";
 import FprogressChartPage from "./Pages/FprogressChartPage";
 
 

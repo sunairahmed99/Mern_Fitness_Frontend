@@ -12,7 +12,6 @@ export default function Fprogress() {
     const {register,handleSubmit,formState: { errors }} = useForm()
     let token = localStorage.getItem('token')
     let {progress} = useSelector(progressdata)
-    console.log(progress)
     let dispatch = useDispatch()
 
     const generatePDF = () => {
@@ -92,12 +91,12 @@ export default function Fprogress() {
       <div className="flex min-h-full flex-1 flex-col justify-center mt-[-70px] px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
-          <h2 className="mt-[-47px] lg:mt-[-100px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          <h2 className="mt-[-187px] lg:mt-[-100px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
             My Fitness Progress
           </h2>
         </div>
 
-        <div className="mt-6 lg:mt-[-40px] sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-[-80px] lg:mt-[-40px] sm:mx-auto sm:w-full sm:max-w-sm">
           <form noValidate className="space-y-6"  method="POST" onSubmit={handleSubmit(onSubmit)}>
 
             <div>

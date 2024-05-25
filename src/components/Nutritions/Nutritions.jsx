@@ -8,9 +8,7 @@ import 'jspdf-autotable';
 
 export default function Nutritions() {
     const {register,handleSubmit,reset,formState: { errors }} = useForm()
-    let {nutrition,loading} = useSelector(nutritiondata)
-    console.log(nutrition)
-    console.log(loading)
+    let {nutrition} = useSelector(nutritiondata)
     let token = localStorage.getItem('token')
     let dispatch = useDispatch()
 
@@ -56,7 +54,7 @@ export default function Nutritions() {
   }
 
     const onSubmit = (data) => {
-      console.log(data)
+      
 
       dispatch(createNutrition({data,token}))
       reset()

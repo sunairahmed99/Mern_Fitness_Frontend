@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { delsupport, fetchsupport, supportdata } from '../Support/supportSlice'
+import { delsupport,fetchsupportadmin, supportdata } from '../Support/supportSlice'
 
 
 export default function AllSupport() {
@@ -15,7 +15,7 @@ export default function AllSupport() {
 
         dispatch(delsupport({id,token}))
         alert('are you sure to delete this')
-        dispatch(fetchsupport(token))
+        dispatch(fetchsupportadmin(token))
 
     }
 
@@ -23,7 +23,7 @@ export default function AllSupport() {
 
     useEffect(()=>{
 
-            dispatch(fetchsupport(token))
+            dispatch(fetchsupportadmin(token))
 
     },[dispatch,token])
 

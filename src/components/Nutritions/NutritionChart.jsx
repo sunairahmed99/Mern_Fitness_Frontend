@@ -3,12 +3,11 @@ import CanvasJSReact from '@canvasjs/react-charts';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNutrition, nutritiondata } from './nutritionSlice';
 //var CanvasJSReact = require('@canvasjs/react-charts');
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 export default function NutritionChart() {
-    let {nutrition,loading} = useSelector(nutritiondata)
+    let {nutrition} = useSelector(nutritiondata)
     let foodData  = nutrition
     let dispatch = useDispatch()
     let token = localStorage.getItem('token')

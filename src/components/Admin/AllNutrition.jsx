@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { delNutrition, fetchNutrition, nutritiondata } from '../Nutritions/nutritionSlice'
+import { delNutrition,fetchNutritionadmin, nutritiondata } from '../Nutritions/nutritionSlice'
 
 
 export default function AllNutrition() {
@@ -14,7 +14,7 @@ export default function AllNutrition() {
 
         dispatch(delNutrition({id,token}))
         alert('are you sure to delete this')
-        dispatch(fetchNutrition(token))
+        dispatch(fetchNutritionadmin(token))
 
     }
 
@@ -22,7 +22,7 @@ export default function AllNutrition() {
 
     useEffect(()=>{
 
-            dispatch(fetchNutrition(token))
+            dispatch(fetchNutritionadmin(token))
 
     },[dispatch,token])
 

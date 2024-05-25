@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getallprogress,delprogress,progressdata } from '../Fprogress/fprogressslice'
+import {delprogress,progressdata, getallprogressadmin } from '../Fprogress/fprogressslice'
 
 
 export default function Allfitness() {
@@ -14,7 +14,7 @@ export default function Allfitness() {
 
         dispatch(delprogress({id,token}))
         alert('are you sure to delete this')
-        dispatch(getallprogress(token))
+        dispatch(getallprogressadmin(token))
 
     }
 
@@ -22,7 +22,7 @@ export default function Allfitness() {
 
     useEffect(()=>{
 
-            dispatch(getallprogress(token))
+            dispatch(getallprogressadmin(token))
 
     },[dispatch,token])
 
