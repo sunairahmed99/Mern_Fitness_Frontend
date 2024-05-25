@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from 'react-redux'
 import { createNutrition, delNutrition, fetchNutrition, nutritiondata } from './nutritionSlice'
 import { Link } from 'react-router-dom'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default function Nutritions() {
     const {register,handleSubmit,reset,formState: { errors }} = useForm()
@@ -11,6 +13,47 @@ export default function Nutritions() {
     console.log(loading)
     let token = localStorage.getItem('token')
     let dispatch = useDispatch()
+
+    const generatePDF = () => {
+  
+    const doc = new jsPDF();
+
+    const columns = [
+      { header: 'User ID', dataKey: 'userId._id' },
+      { header: 'Name', dataKey: 'userId.name' },
+      { header: 'Phone', dataKey: 'userId.phone' },
+      { header: 'Email', dataKey: 'userId.email' },
+      { header: 'Food Type', dataKey: 'foodType' },
+      { header: 'Food Item', dataKey: 'foodItem' },
+      { header: 'Quantity', dataKey: 'quantity' },
+      { header: 'Protein', dataKey: 'protein' },
+      { header: 'Calories', dataKey: 'calories' },
+      { header: 'Created Date', dataKey: 'createdDate' },
+    ];
+
+    const rows = nutrition.map(item => ({
+      'userId._id': item.userId._id,
+      'userId.name': item.userId.name,
+      'userId.phone': item.userId.phone,
+      'userId.email': item.userId.email,
+      'foodType': item.foodType,
+      'foodItem': item.foodItem.join(', '), // Converting array to comma-separated string
+      'quantity': item.quantity,
+      'protein': item.protein,
+      'calories': item.calories,
+      'createdDate': new Date(item.createdDate).toLocaleString(), // Formatting date
+    }));
+
+    doc.text('My Nutrition Data', 14, 20);
+
+    doc.autoTable({
+      startY: 30,
+      head: [columns.map(col => col.header)],
+      body: rows.map(row => columns.map(col => row[col.dataKey])),
+    });
+
+    doc.save('table-data.pdf');
+  }
 
     const onSubmit = (data) => {
       console.log(data)
@@ -40,10 +83,10 @@ export default function Nutritions() {
     <>
       <div className='h-[125vh] bg-bgcolor'>
 
-      <div className="flex min-h-full flex-1 flex-col justify-center mt-[-170px] px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center mt-[-80px] px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
-          <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          <h2 className="mt-[-30px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
             My Nutrition
           </h2>
         </div>
@@ -146,6 +189,8 @@ export default function Nutritions() {
         </div>
       </div>
 
+    
+
     <div className='text-center bg-bgcolor text-white pb-5 lg:mt-[-100px] font-bold text-xl'>
     <h1>Your Nutition Data</h1>
     </div>
@@ -206,6 +251,12 @@ export default function Nutritions() {
                   className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Delete
+                </button>
+                <button
+                  onClick={generatePDF}
+                  className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Generate PDF
                 </button>
                 </td>
               </tr>  

@@ -19,15 +19,24 @@ import AdminProtect from "./components/AdminProtect";
 import Admincheck from "./components/Admincheck";
 import AllUserPage from "./Pages/AllUserPage";
 import AllNutritionPage from "./Pages/AllNutritionPage";
+import AllFitnessPage from "./Pages/AllFitnessPage";
+import AllSupportPage from "./Pages/AllSupportPage";
+import NutritionChartPage from "./Pages/NutritionChartPage";
+import FprogressChart from "./components/Fprogress/FprogressChart";
+import FprogressChartPage from "./Pages/FprogressChartPage";
 
 
 function App() {
   return (
       <Routes>
-
+ 
+        {/* All Admin Routes Starts Here */}
         <Route path='/admin/check/page' element={<AdminProtect children={<Admincheck/>}></AdminProtect>}/>
         <Route path='/all/user/page' element={<AdminProtect children={<AllUserPage/>}></AdminProtect>}/>
         <Route path='/all/nutrition/page' element={<AdminProtect children={<AllNutritionPage/>}></AdminProtect>}/>
+        <Route path='/all/progress/page' element={<AdminProtect children={<AllFitnessPage/>}></AdminProtect>}/>
+        <Route path='/all/support/page' element={<AdminProtect children={<AllSupportPage/>}></AdminProtect>}/>
+        {/* All Admin Routes Starts Here */}
 
 
 
@@ -37,6 +46,8 @@ function App() {
         <Route path='/login/page' element={<LoginPage/>}/>
         <Route path='/forgot/page/' element={<ForgotPage/>}/>
         <Route path='/reset/page/:tokenn' element={<ResetPage/>}/>
+        
+        
         {/* ALL ACCESS ROUTES Ends HERE */}
 
         {/* ALL AUTHENTICATE USER ROUTES STARTS HERE */}
@@ -45,9 +56,11 @@ function App() {
         <Route path='/edit/profile/page/:id' element={<Protect children={<UserProfileEditPage/>}></Protect>}/>
         <Route path='/password/update/page/' element={<Protect children={<PasswordUpdatePage/>}></Protect>}/>
         <Route path='/nutrition/page' element={<Protect children={<NutritionPage/>}></Protect>}/>
+        <Route path='/nutrition/chart' element={<Protect children={<NutritionChartPage/>}></Protect>}/>
         <Route path='/nutrition/edit/page/:id' element={<Protect children={<NutritionEditPage/>}></Protect>}/>
         <Route path='/fitness/progress/page' element={<Protect children={<FprogressPage/>}></Protect>}/>
         <Route path='/fitness/progress/edit/page/:id' element={<Protect children={<FprogresseditPage/>}></Protect>}/>
+        <Route path='/fitness/progress/chart' element={<Protect children={<FprogressChartPage/>}></Protect>}/>
         <Route path='/support/page' element={<Protect children={<SupportPage/>}></Protect>}/>
         {/* ALL AUTHENTICATE USER ROUTES Ends HERE */}
       </Routes>

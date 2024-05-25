@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
+
 export const fetchNutrition = createAsyncThunk(
     'nutrition/fetch',
     async (token,rejectWithValue) => {
@@ -13,10 +14,12 @@ export const fetchNutrition = createAsyncThunk(
                     'Authorization': `Bearer ${token}`
                   }
             })
+            console.log(response)
             console.log(response.data)
             return response.data
 
         }catch(error){
+          console.log(error)
             return rejectWithValue(error)
         }
     },

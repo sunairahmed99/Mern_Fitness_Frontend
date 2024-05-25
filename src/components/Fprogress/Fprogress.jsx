@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from 'react-redux'
 import { createprogress, delprogress, getallprogress, progressdata } from './fprogressslice'
 import { Link } from 'react-router-dom'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+
 
 export default function Fprogress() {
     const {register,handleSubmit,formState: { errors }} = useForm()
@@ -10,6 +14,50 @@ export default function Fprogress() {
     let {progress} = useSelector(progressdata)
     console.log(progress)
     let dispatch = useDispatch()
+
+    const generatePDF = () => {
+      const doc = new jsPDF();
+
+      const columns = [
+        { header: 'User ID', dataKey: 'userId._id' },
+        { header: 'Name', dataKey: 'userId.name' },
+        { header: 'Phone', dataKey: 'userId.phone' },
+        { header: 'Email', dataKey: 'userId.email' },
+        { header: 'Weight', dataKey: 'weight' },
+        { header: 'Waist', dataKey: 'waist' },
+        { header: 'Shoulder', dataKey: 'shoulder' },
+        { header: 'Arms', dataKey: 'arms' },
+        { header: 'Legs', dataKey: 'legs' },
+        { header: 'Run Time', dataKey: 'runTime' },
+        { header: 'Lifting Weight', dataKey: 'liftingWeight' },
+        { header: 'Create Date', dataKey: 'createdate' },
+      ];
+
+      const rows = progress.map(item => ({
+        'userId._id': item.userId._id,
+        'userId.name': item.userId.name,
+        'userId.phone': item.userId.phone,
+        'userId.email': item.userId.email,
+        'weight': item.weight,
+        'waist': item.waist,
+        'shoulder': item.shoulder,
+        'arms': item.arms,
+        'legs': item.legs,
+        'runTime': item.runTime,
+        'liftingWeight': item.liftingWeight,
+        'createdate': new Date(item.createdate).toLocaleString(), // Formatting date
+      }));
+
+      doc.text('My Fitness Progress Data', 14, 20);
+
+      doc.autoTable({
+        startY: 30,
+        head: [columns.map(col => col.header)],
+        body: rows.map(row => columns.map(col => row[col.dataKey])),
+      });
+
+      doc.save('user-metrics-data.pdf');
+    }
 
     const onSubmit = (data) => {
       console.log(data)
@@ -39,17 +87,17 @@ export default function Fprogress() {
 
   return (
     
-    <div className='h-[125vh] bg-bgcolor'>
+    <div className='h-[165vh] bg-bgcolor'>
 
       <div className="flex min-h-full flex-1 flex-col justify-center mt-[-70px] px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
-          <h2 className="mt-[57px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          <h2 className="mt-[-47px] lg:mt-[-100px] text-center text-2xl font-bold leading-9 tracking-tight text-white">
             My Fitness Progress
           </h2>
         </div>
 
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-6 lg:mt-[-40px] sm:mx-auto sm:w-full sm:max-w-sm">
           <form noValidate className="space-y-6"  method="POST" onSubmit={handleSubmit(onSubmit)}>
 
             <div>
@@ -176,11 +224,11 @@ export default function Fprogress() {
         </div>
       </div>
 
-    <div className='text-center bg-bgcolor text-white mb-[30px]  mt-[30px] font-bold text-xl'>
+    <div className='text-center bg-bgcolor text-white mb-[10px]  mt-[-20px] lg:mt-[-150px] font-bold text-xl'>
     <h1>Your Fitness Progress Data</h1>
     </div>
 
-     <div className="relative overflow-x-auto mt-[30px] shadow-md sm:rounded-lg">     
+     <div className="relative overflow-x-auto mt-[-14px] shadow-md sm:rounded-lg">     
      {
       progress  && progress.length &&
       <table className="w-full mt-[5px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -239,6 +287,12 @@ export default function Fprogress() {
                 >
                   Update
                 </Link>
+                <button
+                  onClick={generatePDF}
+                  className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Generate PDF
+                </button>
                 <button
                   onClick={e => delitem(e,prog)}
                   className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser, userdata } from '../User/userSlice'
+import { Link } from 'react-router-dom'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -24,8 +25,8 @@ export default function Navbar() {
       { name: 'Home', href: '/', current: false },
       { name: 'AllUsers', href: '/all/user/page', current: false },
       { name: 'Users Nutritions', href: '/all/nutrition/page', current: false },
-      { name: 'Users Fitness', href: '#', current: false },
-      { name: 'Users Progress', href: '#', current: false },
+      { name: 'Users Fitness', href: '/all/progress/page', current: false },
+      { name: 'Users Support', href: '/all/support/page', current: false },
     ];
 
     userdatas = {
@@ -35,7 +36,6 @@ export default function Navbar() {
     };
     userNavigation = [
       { name: 'My Profile', href: '/profile/page' },
-      { name: 'Update Password', href: '/password/update/page' },
       { name: 'Sign out', href: '/logout/page' },
     ]
   }
@@ -44,7 +44,9 @@ export default function Navbar() {
     navigation = [
       { name: 'Home', href: '/', current: false },
       { name: 'My Nutrition', href: '/nutrition/page', current: false },
+      { name: 'My Nutrition Chart', href: '/nutrition/chart', current: false },
       { name: 'My Fitness', href: '/fitness/progress/page', current: false },
+      { name: 'My Fitness Chart', href: '/fitness/progress/chart', current: false },
       { name: 'My Support', href: '/support/page', current: false },
       { name: 'Logout', href: '/logout/page', current: false },
     ];
@@ -104,17 +106,19 @@ export default function Navbar() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <img
+              style={{height:'340',paddingTop:50}}
                 className="h-8 w-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src={'file.png'}
                 alt="Your Company"
               />
             </div>
+            
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className={classNames(
                       item.current
                         ? 'bg-gray-900 text-white'
@@ -124,7 +128,7 @@ export default function Navbar() {
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -163,15 +167,15 @@ export default function Navbar() {
                     {userNavigation.map((item) => (
                       <Menu.Item key={item.name}>
                         {({ active }) => (
-                          <a
-                            href={item.href}
+                          <Link
+                            to={item.href}
                             className={classNames(
                               active ? 'bg-gray-100' : '',
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     ))}
@@ -198,10 +202,10 @@ export default function Navbar() {
       <Disclosure.Panel className="md:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
           {navigation.map((item) => (
-            <Disclosure.Button
+            <Link
               key={item.name}
-              as="a"
-              href={item.href}
+              as="Link"
+              to={item.href}
               className={classNames(
                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 'block rounded-md px-3 py-2 text-base font-medium'
@@ -209,7 +213,7 @@ export default function Navbar() {
               aria-current={item.current ? 'page' : undefined}
             >
               {item.name}
-            </Disclosure.Button>
+            </Link>
           ))}
         </div>
         <div className="border-t border-gray-700 pb-3 pt-4">
@@ -232,14 +236,14 @@ export default function Navbar() {
           </div>
           <div className="mt-3 space-y-1 px-2">
             {userNavigation.map((item) => (
-              <Disclosure.Button
+              <Link
                 key={item.name}
-                as="a"
-                href={item.href}
+                as="Link"
+                to={item.href}
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
               >
                 {item.name}
-              </Disclosure.Button>
+              </Link>
             ))}
           </div>
         </div>
