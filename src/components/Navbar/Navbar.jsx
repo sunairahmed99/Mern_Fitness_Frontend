@@ -109,7 +109,7 @@ export default function Navbar() {
               style={{height:250,paddingTop:40}}
                 
                 src={'file3.png'}
-                alt="Your Company"
+                alt="my Company"
               />
             </div>
             
